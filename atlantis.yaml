@@ -25,7 +25,7 @@ workflows:
           name: TF_IN_AUTOMATION
           value: 'true'
       - run:
-          command:  terragrunt run-all plan -out=$PLANFILE
+          command:  terragrunt run-all plan --out=$PLANFILE
           output: strip_refreshing
     apply:
       steps:
