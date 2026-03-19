@@ -9,6 +9,10 @@ abort_on_execution_order_fail: true
 projects:
 - workflow: terragrunt
   dir: .
+  autoplan: # Available since v0.1.0
+    when_modified: ["*.tf", "../modules/**/*.tf", ".terraform.lock.hcl","*.hcl"]
+    enabled: true
+
 workflows:
   terragrunt:
     plan:
@@ -21,7 +25,7 @@ workflows:
           name: TF_IN_AUTOMATION
           value: 'true'
       - run:
-          command: terragrunt run-all plan -input=false -out=$PLANFILE
+          command:  terragrunt run-all plan --terragrunt-non-interactive -no-color 2>&1 | tee plan-output.txt
           output: strip_refreshing
     apply:
       steps:
@@ -33,6 +37,3 @@ workflows:
           name: TF_IN_AUTOMATION
           value: 'true'
       - run: terragrunt run-all apply $PLANFILE
-# autoplan: # Available since v0.1.0
-#     when_modified: ["*.tf", "../modules/**/*.tf", ".terraform.lock.hcl","*.hcl"]
-#     enabled: true
