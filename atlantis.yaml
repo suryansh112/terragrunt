@@ -25,7 +25,7 @@ workflows:
           name: TF_IN_AUTOMATION
           value: 'true'
       - run:
-          command:  terragrunt run-all plan --terragrunt-non-interactive -no-color 2>&1 | tee plan-output.txt
+          command:  terragrunt run --all --non-interactive plan -no-color 2>&1 | tee plan-output.txt
     apply:
       steps:
       - env:
@@ -35,4 +35,4 @@ workflows:
           # Reduce Terraform suggestion output
           name: TF_IN_AUTOMATION
           value: 'true'
-      - run: terragrunt run-all apply --terragrunt-non-interactive -auto-approve -no-color
+      - run: terragrunt run --all apply --non-interactive -auto-approve -no-color
