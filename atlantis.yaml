@@ -8,7 +8,7 @@ parallel_apply: true
 abort_on_execution_order_fail: true
 projects:
 - workflow: terragrunt
-  dir: ./
+  dir: dev/
   autoplan: # Available since v0.1.0
     when_modified: ["*.tf", "../modules/**/*.tf", ".terraform.lock.hcl","*.hcl"]
     enabled: true
