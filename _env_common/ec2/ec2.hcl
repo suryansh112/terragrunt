@@ -1,4 +1,3 @@
-#####
 terraform {
   source = "${get_terragrunt_dir()}/../../../modules/ec2"
 }
