@@ -25,7 +25,7 @@ workflows:
           name: TF_IN_AUTOMATION
           value: 'true'
       - run:
-          command:  terragrunt run-all plan --out=$PLANFILE
+          command:  terragrunt run-all plan
           output: strip_refreshing
     apply:
       steps:
@@ -36,4 +36,4 @@ workflows:
           # Reduce Terraform suggestion output
           name: TF_IN_AUTOMATION
           value: 'true'
-      - run: terragrunt run-all apply $PLANFILE
+      - run: terragrunt run-all apply
