@@ -5,8 +5,10 @@ autodiscover:
 delete_source_branch_on_merge: true 
 parallel_plan: true
 parallel_apply: true
-allowed_overrides: [workflow]
 abort_on_execution_order_fail: true
+repos:
+- id: /.*/ # This matches all repositories
+  allowed_overrides: [workflow]
 projects:
 - workflow: terragrunt
   dir: .
