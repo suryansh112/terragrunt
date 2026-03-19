@@ -8,6 +8,7 @@ parallel_apply: true
 abort_on_execution_order_fail: true
 projects:
 - workflow: terragrunt
+  dir: .
 workflows:
   terragrunt:
     plan:
