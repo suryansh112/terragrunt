@@ -26,6 +26,10 @@ workflows:
           value: 'true'
       - run:
           command:  terragrunt run --all --non-interactive plan -no-color 2>&1 | tee plan-output.txt
+      - env:
+          name: DESTROY_PARAMETER
+          command:  if [ "$COMMENT_ARGS" = "\-\d\e\s\t\r\o\y" ]; then echo "-destroy"; else echo ""; fi
+      - run: terragrunt run --all plan --non-interactive -no-color -out $PLANFILE $DESTROY_PARAMETER    
     apply:
       steps:
       - env:
@@ -36,12 +40,7 @@ workflows:
           name: TF_IN_AUTOMATION
           value: 'true'
       - run: terragrunt run --all apply --non-interactive -no-color
-    destroy:
-      steps:
-      - env: 
-        name: TERRAGRUNT_TFPATH
       - env:
-          # Reduce Terraform suggestion output
-          name: TF_IN_AUTOMATION
-          value: 'true'
-      - run: if [ "$COMMENT_ARGS" = "-- -destroy" ]; terragrunt run --all -destroy --non-interactive -no-color
+          name: DESTROY_PARAMETER
+          command:  if [ "$COMMENT_ARGS" = "\-\d\e\s\t\r\o\y" ]; then echo "-destroy"; else echo ""; fi
+      - run: terragrunt run --all $DESTROY_PARAMETER --non-interactive -no-color  
