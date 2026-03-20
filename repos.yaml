@@ -1,0 +1,5 @@
+repos:
+- id: /.*/ # This matches all repositories
+  allowed_overrides: [workflow]
+  apply_requirements: [approved] # Required to apply on main
+  allow_custom_workflows: true

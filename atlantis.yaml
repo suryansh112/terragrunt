@@ -6,6 +6,33 @@ delete_source_branch_on_merge: true
 parallel_plan: true
 parallel_apply: true
 abort_on_execution_order_fail: true
-# autoplan: # Available since v0.1.0
-#     when_modified: ["*.tf", "../modules/**/*.tf", ".terraform.lock.hcl","*.hcl"]
-#     enabled: true
+projects:
+- workflow: terragrunt
+  dir: dev/
+  autoplan: # Available since v0.1.0
+    when_modified: ["*.tf", "../modules/**/*.tf", ".terraform.lock.hcl","*.hcl"]
+    enabled: true
+
+workflows:
+  terragrunt:
+    plan:
+      steps:
+      - env:
+          name: TERRAGRUNT_TFPATH
+          command: 'echo "terraform${ATLANTIS_TERRAFORM_VERSION}"'
+      - env:
+          # Reduce Terraform suggestion output
+          name: TF_IN_AUTOMATION
+          value: 'true'
+      - run:
+          command:  terragrunt run --all --non-interactive plan -no-color 2>&1 | tee plan-output.txt
+    apply:
+      steps:
+      - env:
+          name: TERRAGRUNT_TFPATH
+          command: 'echo "terraform${ATLANTIS_TERRAFORM_VERSION}"'
+      - env:
+          # Reduce Terraform suggestion output
+          name: TF_IN_AUTOMATION
+          value: 'true'
+      - run: terragrunt run --all apply --non-interactive -auto-approve -no-color
