@@ -25,11 +25,8 @@ workflows:
           name: TF_IN_AUTOMATION
           value: 'true'
       - run:
-          command:  terragrunt run --all --non-interactive plan -no-color 2>&1 | tee plan-output.txt
-      - env:
-          name: DESTROY_PARAMETER
-          command:  if [ "$COMMENT_ARGS" = "\-\d\e\s\t\r\o\y" ]; then echo "-destroy"; else echo ""; fi
-      - run: terragrunt run --all plan --non-interactive -no-color -out $PLANFILE $DESTROY_PARAMETER    
+          command: terragrunt run --all --non-interactive plan $(printf '%s' "$COMMENT_ARGS" | sed 's/,/ /g' | tr -d '\\') -no-color
+
     apply:
       steps:
       - env:
@@ -40,7 +37,3 @@ workflows:
           name: TF_IN_AUTOMATION
           value: 'true'
       - run: terragrunt run --all apply --non-interactive -no-color
-      - env:
-          name: DESTROY_PARAMETER
-          command:  if [ "$COMMENT_ARGS" = "\-\d\e\s\t\r\o\y" ]; then echo "-destroy"; else echo ""; fi
-      - run: terragrunt run --all $DESTROY_PARAMETER --non-interactive -no-color  
