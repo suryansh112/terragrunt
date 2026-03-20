@@ -44,4 +44,4 @@ workflows:
           # Reduce Terraform suggestion output
           name: TF_IN_AUTOMATION
           value: 'true'
-      - run: terragrunt run --all destroy --non-interactive -no-color
+      - run: if [ "$COMMENT_ARGS" = "-- -destroy" ]; terragrunt run --all -destroy --non-interactive -no-color
