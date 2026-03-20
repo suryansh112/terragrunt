@@ -25,7 +25,8 @@ workflows:
           name: TF_IN_AUTOMATION
           value: 'true'
       - run:
-          command:  terragrunt run --all --non-interactive plan -no-color 2>&1 | tee plan-output.txt
+          command: terragrunt run --all --non-interactive plan $(printf '%s' "$COMMENT_ARGS" | sed 's/,/ /g' | tr -d '\\') -no-color
+
     apply:
       steps:
       - env:

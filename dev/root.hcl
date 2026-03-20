@@ -1,5 +1,5 @@
 locals {
-    # Load account and region variables
+    ### Load account and region variables
     account_vars    = read_terragrunt_config(find_in_parent_folders("account.hcl"))
     aws_account_id  = local.account_vars.locals.aws_account_id
 }
