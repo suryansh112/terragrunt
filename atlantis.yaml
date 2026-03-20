@@ -36,3 +36,12 @@ workflows:
           name: TF_IN_AUTOMATION
           value: 'true'
       - run: terragrunt run --all apply --non-interactive -no-color
+    destroy:
+      steps:
+      - env: 
+        name: TERRAGRUNT_TFPATH
+      - env:
+          # Reduce Terraform suggestion output
+          name: TF_IN_AUTOMATION
+          value: 'true'
+      - run: terragrunt run --all destroy --non-interactive -no-color
