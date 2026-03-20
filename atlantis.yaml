@@ -35,4 +35,4 @@ workflows:
           # Reduce Terraform suggestion output
           name: TF_IN_AUTOMATION
           value: 'true'
-      - run: terragrunt run --all apply --non-interactive -auto-approve -no-color
+      - run: terragrunt run --all apply --non-interactive --auto-approve -no-color
