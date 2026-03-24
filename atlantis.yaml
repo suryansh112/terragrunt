@@ -10,7 +10,7 @@ projects:
 - workflow: terragrunt
   dir: dev/
   autoplan: # Available since v0.1.0
-    when_modified: ["*.tf", "../modules/**/*.tf", ".terraform.lock.hcl","*.hcl"]
+    when_modified: ["*.tf", "modules/**/*.tf", ".terraform.lock.hcl","*.hcl","_env_common/**/**/*"]
     enabled: true
 
 workflows:
