@@ -1,6 +1,6 @@
 terraform {
   #source = "${get_terragrunt_dir()}/../../../modules/load-balancer"
-  source = "https://github.com/suryansh112/terragrunt.git//dev/modules/load-balancer?ref=v3.0"
+  source = "https://github.com/suryansh112/terragrunt.git//dev/modules/load-balancer?ref=v4.0"
 }
 
 dependency "vpc" {
