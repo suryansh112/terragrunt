@@ -1,5 +1,6 @@
 terraform {
-  source = "${get_terragrunt_dir()}/../../../modules/vpc"
+  #source = "${get_terragrunt_dir()}/../../../modules/vpc"
+  source = "https://github.com/suryansh112/terragrunt.git//dev/modules/vpc?ref=v3.0"
 }
 
 inputs = {
@@ -8,5 +9,5 @@ inputs = {
     vpc_name             = "vpc"
     igw_name             = "igw"
     ngw_name             = "ngw"
-    enable_nat_gateway   = "true"    
+    enable_nat_gateway   = "false"    
 }
