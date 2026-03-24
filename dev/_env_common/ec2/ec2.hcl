@@ -1,5 +1,5 @@
 terraform {
-  source = "${get_terragrunt_dir()}/../../../modules/ec2"
+  #source = "${get_terragrunt_dir()}/../../../modules/ec2"
   source = "git::https://github.com/suryansh112/terragrunt.git//dev/modules/ec2?ref=v1.0"
 }
 
