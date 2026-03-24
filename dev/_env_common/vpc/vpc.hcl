@@ -1,6 +1,6 @@
 terraform {
   #source = "${get_terragrunt_dir()}/../../../modules/vpc"
-  source = "https://github.com/suryansh112/terragrunt.git//dev/modules/vpc?ref=v2.0"
+  source = "https://github.com/suryansh112/terragrunt.git//dev/modules/vpc?ref=v3.0"
 }
 
 inputs = {
