@@ -91,7 +91,7 @@ resource "aws_route_table" "private_rtb" {
     gateway_id = aws_nat_gateway.ngw[0].id
   }
   tags = {
-    Name = "${var.env}-${var.vpc_name}-private-rtb"
+    Name = "${var.env}-${var.vpc_name}-private-rtb-test"
     env  = var.env
   }
 }
