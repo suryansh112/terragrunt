@@ -77,7 +77,7 @@ resource "aws_route_table" "public_rtb" {
     gateway_id = aws_internet_gateway.igw.id
   }
   tags = {
-    Name = "${var.env}-${var.vpc_name}-public-rtb"
+    Name = "${var.env}-${var.vpc_name}-public-rtb-test"
     env  = var.env
   }
 }
